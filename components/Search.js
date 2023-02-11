@@ -9,8 +9,16 @@ import { getFilmsFromApiWithSearchedText } from "../API/TMDBApi";
 
 class Search extends React.Component{
 
+  constructor(props){
+    super(props)
+    this._films = []
+  }
+  
   _loadFilms(){
-    getFilmsFromApiWithSearchedText("star").then(data => console.log(data))
+    getFilmsFromApiWithSearchedText("star").then(data => {
+      this._films = data.results;
+      this.forceUpdate();
+    })
 
   }
 
@@ -34,7 +42,7 @@ class Search extends React.Component{
 const styles = StyleSheet.create({
     main_container: {
         flex:1,
-        marginTop: 20
+        marginTop: 50
     },
     
     textinput: {
