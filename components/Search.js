@@ -14,15 +14,16 @@ class Search extends React.Component{
     this.state = { films :[] }
   }
   
-  _loadFilms(){
-    getFilmsFromApiWithSearchedText("star").then(data => {
-      this.setState( { films: data.results })
-    })
+  async _loadFilms(){
+    const data = await getFilmsFromApiWithSearchedText("star");
+    console.log(data)
+    this.setState({films: [data]})
 
   }
 
 
     render(){
+      console.log("RENDER");
         return (
             <View style={styles.main_container}>
               <TextInput style={styles.textinput} placeholder='Titre du film'/>
