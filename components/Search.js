@@ -12,12 +12,20 @@ class Search extends React.Component{
   constructor(props){
     super(props)
     this.state = { films :[] }
+    this.searchedText = ""
   }
   
+  _searchTextInputChanged(text){
+    this.searchedText = text
+  }
+
   async _loadFilms(){
-    const data = await getFilmsFromApiWithSearchedText("star");
+    console.log(this.state.searchedText)
+    if (this.state.searchedText.length > 0 ){
+    const data = await getFilmsFromApiWithSearchedText(this.state.searchedText);
     console.log(data)
     this.setState({films: [data]})
+    }
 
   }
 
@@ -26,7 +34,9 @@ class Search extends React.Component{
       console.log("RENDER");
         return (
             <View style={styles.main_container}>
-              <TextInput style={styles.textinput} placeholder='Titre du film'/>
+              <TextInput style={styles.textinput} 
+              placeholder='Titre du film'
+              onChangeText={text => this._searchTextInputChanged(text)}/>
               <Button title='Rechercher' onPress={() => this._loadFilms()}/>
 
             <FlatList
