@@ -19,10 +19,10 @@ class Search extends React.Component{
     this.searchedText = text
   }
 
-  async _loadFilms(){
-    console.log(this.state.searchedText)
-    if (this.state.searchedText.length > 0 ){
-    const data = await getFilmsFromApiWithSearchedText(this.state.searchedText);
+  _loadFilms(){
+    console.log(this.searchedText)
+    if (this.searchedText.length > 0 ){
+    const data = getFilmsFromApiWithSearchedText(this.searchedText);
     console.log(data)
     this.setState({films: [data]})
     }
